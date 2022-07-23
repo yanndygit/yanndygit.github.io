@@ -1,167 +1,73 @@
      <meta charset="utf-8" emacsmode="-*- markdown -*-"><link rel="stylesheet" href="https://casual-effects.com/markdeep/latest/website.css?">
 
-                          **日记本**
+                          **随思录**
 
-This is a sample style sheet for a website with a fixed menu on the left side of the screen and
-a banner at the top.
-
-202207
+20220723  开始一个BLOG
 ==============================================
-**新闻**
+**开始写一个blog，记录学习思考的内容**
+
+BLOG建立在github Page上，记录下一些过程，耗时约4h
+
+[开始参考的教程](https://www.zhihu.com/question/20962496)
+
+**教程中问题1：git push -u origin main， 不是master**
+
+push的时候提示，是因为现在不支持密码方式了，要用ssh方式。
+
+~~~~~~~~~~~~~~~~~~~~~~~~
+remote: Support for password authentication was removed on August 13, 2021. Please use a personal access token instead.
+remote: Please see https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/ for more informa
+tion.
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+修改成ssh方式：
+
+1、参考[生成key教程](http://t.zoukankan.com/hicolin-p-13747996.html)
+
+一定要用ed25519, 下面语句不支持。
+
+$ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+
+~~~~~~~~~~~~~~~~~~~~~~~~
+$ssh-keygen -t ed25519 -C "your_email@example.com"
+Generating public/private rsa key pair.
+Enter file in which to save the key (/c/Users/.ssh/id_ed25519):
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /c/Users/.ssh/id_ed25519.
+Your public key has been saved in /c/Users/.ssh/id_ed25519.pub.
+
+$ clip < ~/.ssh/id_rsa.pub
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+然后贴到github网站的ssh keys中
 
 
+**问题2：origin方式由https修改成ssl方式遇到问题**
 
-测试
-=========================================================
-# 1级标题
-## 2级标题
-### 3级标题
+$ git remote add origin git@github.com:用户名/用户名.github.io.git
 
+fatal: remote origin already exists.
 
-段落段落段落段落1
+$  git remote rm origin
 
-段落段落段落段落2
+$ git remote add origin git@github.com:用户名/用户名.github.io.git
 
-**粗体强调**
+$ git remote -v
 
-*斜体*
+origin  git@github.com:用户名/用户名.github.io.git (fetch)
 
-This text is ***粗体加斜体***.
-
-> 这个是块引用
-
->多个块引用1
->多个块引用2
->多个块引用3
-
->多个块引用1
->多个块引用2
->>嵌套块引用3
-
->下面是列表块引用
-
-> 1. First item
-> 2. Second item
-> 3. Third item
-> 4. Fourth item
+origin  git@github.com:用户名/用户名.github.io.git (push)
 
 
-- First item
-- Second item
-- Third item
-- Fourth item
+$ git add --all
+$ git commit -m "test"
+$ git push -u origin main
 
+访问https://用户名.github.io/
 
-**图片**
- ![Tux, the Linux mascot](https://www.markdown.xyz/assets/images/tux.png)
+成功！
 
-
-**链接**
-My favorite search engine is [markdown说明](https://www.markdown.xyz/basic-syntax/).
-
-**网页**
-
-<https://www.markdownguide.org>
-
-<fake@example.com>
-
-
-**表格**
-| Syntax      | Description | Test Text     |
-| :---        |    :----:   |          ---: |
-| Header      | Title       | Here's this   |
-| Paragraph   | Text        | And more      |
-
-
-**围栏式代码块**
-
-```json
-{
-  "firstName": "John",
-  "lastName": "Smith",
-  "age": 25
-}
-```
-
-**脚注**
-Here's a simple footnote,[^1] and here's a longer one.[^bignote]
-
-[^1]: This is the first footnote.
-
-[^bignote]: Here's one with multiple paragraphs and code.
-
-    Indent paragraphs to include them in the footnote.
-
-    `{ my code }`
-
-    Add as many paragraphs as you like.
-
-**任务列表**
-
-- [x] Write the press release
-
-- [ ] Update the website
-
-- [ ] Contact the media
-
-**删除线**
-~~The world is flat.~~ We now know that the world is round.
-
-
-**表情**
-Gone camping! :tent: Be back soon.
-That is so funny! :joy:
-
-
-**高亮**
-I need to highlight these ==very important words==.
-
-
-
-Features
-==============================================================
-You could describe your product or project here. I'll instead 
-use a paraphrased excerpt from The Charter as a placeholder:
-
-
-Attendu que le Canada est fondé sur des principes qui reconnaissent la suprématie de Dieu et la primauté du droit:
-
-*Garantie des droits et libertés*: 
-1. La Charte canadienne des droits et libertés garantit les droits et libertés qui y sont énoncés. Ils ne peuvent être restreints que par une règle de droit, dans des limites qui soient raisonnables et dont la justification puisse se démontrer dans le cadre d’une société libre et démocratique.
-
-*Libertés fondamentales*:
-2. Chacun a les libertés fondamentales suivantes:
-  a) liberté de conscience et de religion;
-  b) liberté de pensée, de croyance, d’opinion et d’expression, y compris la liberté de la presse et des autres moyens de communication;
-  c) liberté de réunion pacifique;
-  d) liberté d’association.
-
-*Droits démocratiques*:
-3. Tout citoyen canadien a le droit de vote et est éligible aux élections législatives fédérales ou provinciales.
-
-4. &nbsp;
-  1. Le mandat maximal de la Chambre des communes et des assemblées législatives est de cinq ans à compter de la date fixée pour le retour des brefs relatifs aux élections générales correspondantes. (81)
-  2. Le mandat de la Chambre des communes ou celui d’une assemblée législative peut être prolongé respectivement par le Parlement ou par la législature en question au-delà de cinq ans en cas de guerre, d’invasion ou d’insurrection, réelles ou appréhendées, pourvu que cette prolongation ne fasse pas l’objet d’une opposition exprimée par les voix de plus du tiers des députés de la Chambre des communes ou de l’assemblée législative. (82)
-
-5. Le Parlement et les législatures tiennent une séance au moins une fois tous les douze mois.
-
-Team
-==============================================================
-
-- CEO and Cofounder
-- CTO and Cofounder
-- Awesome Coders
-- Marketing Person
-
-About
-==============================================================
-
-
-
-The faux-logo icon in the banner is from 
-[Freepik](https://www.freepik.com)
-and licensed under [CC 3.0 BY](http://creativecommons.org/licenses/by/3.0).
-Replace `website-banner.png` in the CSS file to replace it with your own.
 
 
 <style class="fallback">body{visibility:hidden}</style><script>markdeepOptions={tocStyle:'long'};</script>
